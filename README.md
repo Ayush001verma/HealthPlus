@@ -16,13 +16,11 @@ The MediRAG platform follows a client-server architecture with AI integration fo
 
 ### System Architecture Diagram
 
-![Healthcare Application Architecture](https://imgr.whimsical.com/thumbnails/4J4giaGuJZkrEKcY9DLTzn/L6k2ke5FcVsEHCqcWDNyqv)
-
 ```mermaid
 graph TD
     A[Frontend - React.js] -->|API Requests| B[Backend - Node.js]
     B -->|Responses| A
-    B -->|AI Processing| C[OpenAI API]
+    B -->|AI Processing| C[Gemini API]
     C -->|Analysis Results| B
     B -->|Data Storage| D[(Database)]
     E[Users] -->|Interacts with| A
@@ -70,7 +68,7 @@ graph TD
 |-------|-------------|
 | **Frontend** | React.js, TypeScript, Tailwind CSS |
 | **Backend** | Node.js, Express |
-| **AI Integration** | OpenAI API |
+| **AI Integration** | Gemini API |
 | **File Processing** | Multer, pdf-img-convert |
 | **Styling** | Tailwind CSS, Lucide React (icons) |
 | **Routing** | React Router |
@@ -81,14 +79,14 @@ graph TD
 ### Prerequisites
 - Node.js (v14 or higher)
 - npm or yarn
-- OpenAI API key
+- Gemini API key
 
 ### Installation
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/your-username/healthcare-website.git
-   cd healthcare-website
+   git clone https://github.com/10vulture1005/medirag.git
+   cd medirag
    ```
 
 2. **Setup the backend**:
@@ -107,8 +105,8 @@ graph TD
    Create a `.env` file in the backend directory with:
    ```
    PORT=3001
-   OPENAI_API_KEY=your_openai_api_key
-   DATABASE_URL=your_database_connection_string
+   GEMINI_API_KEY=YOUR_GEMINI_API_KEY
+   DATABASE_URL=YOUR_DATABASE_CONNECTION_STRING
    ```
 
 5. **Start the development servers**:
@@ -138,24 +136,6 @@ graph TD
 | `/api/test` | GET | Test backend connectivity | - | Connection status |
 | `/api/appointments` | Various | Manage appointments | Appointment details | Confirmation/details |
 
-## 📦 Project Structure
-
-```
-healthcare-website/
-├── backend/               # Node.js backend
-│   ├── index.js           # Main server file
-│   ├── uploads/           # Storage for uploaded files
-│   └── package.json       # Backend dependencies
-├── frontend/              # React frontend
-│   ├── public/            # Static files
-│   ├── src/               # Source code
-│   │   ├── components/    # React components
-│   │   ├── styles/        # CSS styles
-│   │   ├── api/           # API service files
-│   │   └── routes/        # Frontend routes
-│   └── package.json       # Frontend dependencies
-└── README.md              # Project documentation
-```
 
 ## 🔄 Component Flow
 
@@ -213,27 +193,10 @@ We welcome contributions to improve MediRAG. Please follow these steps:
 5. Push to the branch (`git push origin feature/AmazingFeature`)
 6. Open a Pull Request
 
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
 
 ## 👏 Acknowledgments
 
-- OpenAI for providing the AI models
+- Gemini for providing the AI models
 - React and Node.js communities for excellent documentation
 - All contributors who have helped improve this project
 
-## 📞 Contact
-
-Your Name - arkavaiya@gmail.com
-
-Project Link: [https://github.com/your-username/healthcare-website](https://github.com/Yash-Kavaiya/MediRAG)
-
----
-
-<div align="center">
-
-**MediRAG** - Your Partner in Modern Healthcare
-
-</div>
-# medirag
