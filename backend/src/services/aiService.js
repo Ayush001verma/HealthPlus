@@ -1,9 +1,8 @@
 const fs = require('fs');
 const genAI = require('../config/gemini');
 const env = require('../config/env');
-const { getImageDataUrl } = require('./imageService');
 
-// Helper to convert local image to Gemini inline data
+// Helper to convert local file to Gemini inline data
 function fileToGenerativePart(path, mimeType) {
   return {
     inlineData: {
@@ -14,14 +13,20 @@ function fileToGenerativePart(path, mimeType) {
 }
 
 async function analyzeImageWithAI(imagePath) {
-  // Use gemini-1.5-flash which is multimodal and good for general visual tasks
+  // Use gemini-1.5-flash which is multimodal and good for general visual/document tasks
   const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-  const prompt = "You are an expert radiologist analyzing X-ray images. Provide a detailed diagnosis, confidence level, additional findings, and recommended actions. Analyze this X-ray image and provide a detailed diagnosis.";
+  const prompt = "You are an expert radiologist and medical analyst. Provide a detailed diagnosis, confidence level, additional findings, and recommended actions. Analyze this medical document or X-ray image and provide a detailed diagnosis.";
   
-  // Extract mimetype from path (naively for png/jpg)
   const ext = imagePath.split('.').pop().toLowerCase();
-  const mimeType = ext === 'png' ? 'image/png' : 'image/jpeg';
+  let mimeType;
+  if (ext === 'pdf') {
+    mimeType = 'application/pdf';
+  } else if (ext === 'png') {
+    mimeType = 'image/png';
+  } else {
+    mimeType = 'image/jpeg';
+  }
   
   const imagePart = fileToGenerativePart(imagePath, mimeType);
 
@@ -39,8 +44,9 @@ async function generateHealthPlan(prompt) {
       contents: [{ role: "user", parts: [{ text: prompt }] }],
       generationConfig: {
         temperature: 0.3,
-        maxOutputTokens: 1000,
+        maxOutputTokens: 8192,
         topP: 1.0,
+        responseMimeType: "application/json",
       }
   });
   

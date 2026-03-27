@@ -165,7 +165,7 @@ flowchart TB
 
 1. **Upload**: User uploads X-ray image or PDF document
 2. **Processing**: System converts PDFs to images if needed
-3. **AI Analysis**: OpenAI API analyzes the image with expert radiologist prompting
+3. **AI Analysis**: Gemini API analyzes the image with expert radiologist prompting
 4. **Results**: System returns diagnosis, confidence level, and recommendations
 
 ### Health Plan Generation
